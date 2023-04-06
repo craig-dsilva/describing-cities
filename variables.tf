@@ -22,3 +22,7 @@ variable "cidr" {
   sensitive = true
   type = string
 }
+
+variable "backend-domain" {
+  default = "backend.cloudproject.craigdsilva.com"
+}

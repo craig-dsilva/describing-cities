@@ -46,6 +46,15 @@ resource "aws_security_group_rule" "ssh" {
   security_group_id = var.security-group-id
 }
 
+resource "aws_security_group_rule" "Describing-cities-unsecured" {
+  type = "ingress"
+  from_port = 80
+  to_port = 80
+  protocol = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = var.security-group-id
+}
+
 resource "aws_security_group_rule" "Describing-cities" {
   type = "ingress"
   from_port = 443
@@ -53,4 +62,16 @@ resource "aws_security_group_rule" "Describing-cities" {
   protocol = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
   security_group_id = var.security-group-id
+}
+
+resource "aws_route53_zone" "backend-zone" {
+  name = var.backend-domain
+}
+
+resource "aws_route53_record" "backend-record" {
+  zone_id = aws_route53_zone.backend-zone.zone_id
+  name = var.backend-domain
+  type = "A"
+  ttl = 300
+  records = [ aws_eip.ip.public_ip ]
 }
