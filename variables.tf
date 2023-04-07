@@ -32,3 +32,12 @@ variable "frontend-domain" {
   type = string
   default = "cloud.craigdsilva.com"
 }
+
+variable "db-username" {
+  type = string
+  sensitive = true
+}
+variable "db-password" {
+  type = string
+  sensitive = true
+}

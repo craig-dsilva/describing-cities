@@ -46,15 +46,6 @@ resource "aws_security_group_rule" "ssh" {
   security_group_id = var.security-group-id
 }
 
-resource "aws_security_group_rule" "Describing-cities-unsecured" {
-  type = "ingress"
-  from_port = 80
-  to_port = 80
-  protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = var.security-group-id
-}
-
 resource "aws_security_group_rule" "Describing-cities" {
   type = "ingress"
   from_port = 443
@@ -86,4 +77,14 @@ resource "aws_route53_record" "frontend-record" {
   type = "A"
   ttl = 300
   records = [ aws_eip.ip.public_ip ]
+}
+
+resource "aws_db_instance" "db" {
+    allocated_storage = 20
+    db_name = "my_db"
+    engine = "postgres"
+    engine_version = "14"
+    instance_class = "db.t3.micro"
+    username = var.db-username
+    password = var.db-password
 }
