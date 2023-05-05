@@ -25,12 +25,12 @@ variable "cidr" {
 
 variable "backend-domain" {
   type = string
-  default = "backend.cloudproject.craigdsilva.com"
+  default = "describingcitiesbackend.craigdsilva.com"
 }
 
 variable "frontend-domain" {
   type = string
-  default = "cloud.craigdsilva.com"
+  default = "describingcities.craigdsilva.com"
 }
 
 variable "db-username" {
